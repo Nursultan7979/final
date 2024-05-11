@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body{
+            line-height: 1.5;
+            font-family: 'Poppins', sans-serif;
+        }
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+
+        ul{
+            list-style: none;
+        }
+        .footer{
+            background-color: rgba(26,25,25,0.16);
+            padding: 70px 0;
+        }
+        .footer-col{
+            width: 25%;
+            padding: 0 15px;
+        }
+        .footer-col h4{
+            font-size: 18px;
+            color: #000;
+            text-transform: capitalize;
+            margin-bottom: 35px;
+            font-weight: 500;
+            position: relative;
+        }
+        .footer-col h4::before{
+            content: '';
+            position: absolute;
+            left:0;
+            bottom: -10px;
+            background-color: #e91e63;
+            height: 2px;
+            box-sizing: border-box;
+            width: 50px;
+        }
+        .footer-col ul li:not(:last-child){
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a{
+            font-size: 16px;
+            text-transform: capitalize;
+            text-decoration: none;
+            font-weight: 300;
+            color: #56504E;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        .footer-col ul li a:hover{
+            color: #3D3A39;
+            padding-left: 6px;
+        }
+        .footer-col .social-links a{
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255,255,255,0.2);
+            margin:0 10px 10px 0;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: #3D3A39;
+            transition: all 0.5s ease;
+        }
+        .footer-col .social-links a:hover{
+            color: #2f2d2d;
+            background-color: #FA7004;
+        }
+
+        /*responsive*/
+        @media(max-width: 767px){
+            .footer-col{
+                width: 50%;
+                margin-bottom: 30px;
+            }
+        }
+        @media(max-width: 574px){
+            .footer-col{
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Technodom</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/addproduct">Add product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/resources/templates/userlist.html">Users</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4 mb-4" th:each="product : ${products}">
+            <div class="card">
+                <img th:src="${product.img_path}" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${product.name}">Product Name</h5>
+                    <p class="card-text" th:text="'Price: ' + ${product.price} + '₸'">Price: $0.00</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col">
+                <h4>Компания</h4>
+                <ul>
+                    <li class="list-inline-item"><a href="/footer/about">about us</a></li>
+                    <li><a href="#">our services</a></li>
+                    <li class="list-inline-item"><a href="/footer/privacy-policy">Политика конфиденциальности</a></li>
+                    <li><a href="#">affiliate program</a></li>
+                    <li class="list-inline-item"><a href="/footer/terms">Условия использования</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>get help</h4>
+                <ul>
+                    <li class="list-inline-item"><a href="/footer/faq">Страница часто задаваемых вопросов (FAQ)</a></li>
+                    <li><a href="#">shipping</a></li>
+                    <li><a href="#">returns</a></li>
+                    <li><a href="#">order status</a></li>
+                    <li><a href="#">payment options</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>online shop</h4>
+                <ul>
+                    <li><a href="#">watch</a></li>
+                    <li><a href="#">bag</a></li>
+                    <li><a href="#">shoes</a></li>
+                    <li><a href="#">dress</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>follow us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Add Product</h1>
+    <form action="/addedproduct" method="post">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="productName" required>
+
+        <label for="productPrice">Price:</label>
+        <input min="0" type="number" id="productPrice" name="productPrice" required>
+
+        <label for="productDescription">Description:</label>
+        <textarea id="productDescription" name="productDescription" rows="4" required></textarea>
+
+        <label for="productQuantity">Quantity:</label>
+        <input min="0" type="number" id="productQuantity" name="productQuantity" required>
+
+        <label for="productCategory">Category:</label>
+        <input type="text" id="productCategory" name="productCategory" required>
+
+        <label for="productImg_path">Img_path:</label>
+        <input type="text" id="productImg_path" name="productImg_path" required>
+
+        <input type="submit" value="Add Product">
+    </form>
+</div>
+</body>
+</html>

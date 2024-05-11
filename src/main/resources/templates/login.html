@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 40px;
+        }
+        h1{
+            text-align: center;
+        }
+        .form-signin {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: auto;
+        }
+
+        .form-signin .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .form-signin input[type="text"],
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .form-signin button[type="submit"] {
+            background: orange;
+            margin-top: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Login Form</h1>
+    <form action="/logined" method="post" class="form-signin">
+        <div th:if="${param.error}">
+            <p class="error-message">Неверный email или пароль. Пожалуйста, попробуйте снова.</p>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+</body>
+</html>
