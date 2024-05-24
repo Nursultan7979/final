@@ -1,4 +1,4 @@
-package org.example.Entity;
+package org.example.entity;
 
 import javax.persistence.*;
 
@@ -10,25 +10,28 @@ public class Products {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = true)
     private String name;
 
-    @Column(name = "price")
+    @Column(name = "price", nullable = true)
     private Double price;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = true, columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = true)
     private int quantity;
 
-    @Column(name = "category")
+    @Column(name = "category", nullable = true)
     private String category;
 
-    @Column(name = "img_path")
-    private String img_path;
+    @Column(name = "img_path", nullable = true)
+    private String imgPath;
 
-    public Long getId() {return id;}
+
+    public Long getId() {
+        return id;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -38,7 +41,9 @@ public class Products {
         return name;
     }
 
-    public void setName(String name) {this.name = name;}
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Double getPrice() {
         return price;
@@ -52,7 +57,9 @@ public class Products {
         return description;
     }
 
-    public void setDescription(String description) {this.description = description;}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public int getQuantity() {
         return quantity;
@@ -70,7 +77,11 @@ public class Products {
         this.category = category;
     }
 
-    public String getImg_path() {return img_path;}
+    public String getImgPath() {
+        return imgPath;
+    }
 
-    public void setImg_path(String img_path) {this.img_path = img_path;}
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
 }

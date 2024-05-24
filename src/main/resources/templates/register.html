@@ -4,9 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 40px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: auto;
+        }
+        form .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="password"] {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+        form button[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .d-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+    </style>
+
 </head>
 <body>
-<h2>User Registration</h2>
+<h2>Registration</h2>
 <form action="./registration" method="post">
     <label for="username">Username:</label><br>
     <input type="text" id="username" name="username" required><br>
@@ -15,7 +71,10 @@
     <label for="password">Password:</label><br>
     <input type="password" id="password" name="password" required><br>
     <label for="password">Confirm Password:</label><br>
-    <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+    <input type="password" id="confirm_password" name="confirm_password" required><br>
+    <div class="d-flex justify-content-between">
+        <a href="/login">Login</a>
+    </div>
     <button type="submit">Register</button>
 </form>
 </body>

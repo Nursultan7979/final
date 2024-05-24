@@ -1,5 +1,10 @@
-package org.example.service;
+package org.example.service.impl;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.example.service.UserService;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,11 +33,25 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean loginedUser(String email, String password) {
-        String sql = "SELECT hash_password FROM users WHERE email = ?";
-        String hashedPassword = jdbcTemplate.queryForObject(sql, String.class, email);
+        try {
+            String sql = "SELECT hash_password FROM users WHERE email = ?";
+            String hashedPassword = jdbcTemplate.queryForObject(sql, String.class, email);
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        return encoder.matches(password, hashedPassword);
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            return encoder.matches(password, hashedPassword);
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        }
     }
 
+    @Override
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
+        request.getSession().invalidate();
+
+        Cookie cookie = new Cookie("user", null);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+    }
 }

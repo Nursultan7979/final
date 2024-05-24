@@ -1,27 +1,23 @@
 package org.example.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.example.Entity.Products;
 import org.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-
 @Controller
 public class ProductController {
 
     @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
-    @GetMapping("/index")
-    public String getProducts(Model model) {
-        List<Products> products = productService.getAllProducts();
-        model.addAttribute("products", products);
-        return "index";
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping("/addproduct")
@@ -29,17 +25,31 @@ public class ProductController {
         return "addproduct";
     }
 
+    @PostMapping("/deleteproduct")
+    public String handleDeleteProduct(HttpServletRequest request, Model model) {
+        int productId = Integer.parseInt(request.getParameter("productId"));
+        productService.deleteProduct(productId);
+        return "redirect:";
+    }
+
+
     @PostMapping("/addedproduct")
-    public String addProduct(HttpServletRequest request) {
-        String productName = request.getParameter("productName");
-        int price = Integer.parseInt(request.getParameter("productPrice"));
-        String description = request.getParameter("productDescription");
-        int quantity = Integer.parseInt(request.getParameter("productQuantity"));
-        String category = request.getParameter("productCategory");
-        String imgPath = request.getParameter("productImg_path");
+    public String handleAddProduct(HttpServletRequest request, Model model) {
+        try {
+            String productName = request.getParameter("productName");
+            int price = Integer.parseInt(request.getParameter("productPrice"));
+            String description = request.getParameter("productDescription");
+            int quantity = Integer.parseInt(request.getParameter("productQuantity"));
+            String category = request.getParameter("productCategory");
+            String imgPath = request.getParameter("productImg_path");
 
-        productService.addProduct(productName, price, description, quantity, category, imgPath);
 
-        return "redirect:/index";
+            productService.addProduct(productName, price, description, quantity, category, imgPath);
+
+            return "redirect:";
+        } catch (NumberFormatException e) {
+            model.addAttribute("error", "Invalid input for price or quantity. Please enter valid numbers.");
+            return "addproduct";
+        }
     }
 }
